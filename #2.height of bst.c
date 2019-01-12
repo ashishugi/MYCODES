@@ -1,4 +1,4 @@
-
+/**********CODE WILL RUN PROPERLY IN TURBO C COMPILER ***************/
 #include<stdio.h>
 #include<conio.h>
 #include<alloc.h>
