@@ -1,3 +1,4 @@
+/************WILL WORK PROPERLY ON TURBO C COMPILER ***********************/
 #include<stdio.h>
 #include<conio.h>
 int arc[5][5];
