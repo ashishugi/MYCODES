@@ -17,11 +17,11 @@ ll lids(int *ar , int size){
     }
     /******************** now for decreasing one ***************************/
     int *dec_out = new int[size+1];
-    dec_out[0]=1;
-    for(int i=1;i<size;i++){
+    dec_out[size-1]=1;
+    for(int i=size-2;i>=0;i--){
         dec_out[i]=1;
-        for(int j=i-1;j>=0;--j){
-            if(ar[j]>ar[i]){
+        for(int j=i+1;j<size;++j){
+            if(ar[j]<ar[i]){
             int sol = dec_out[j]+1;
             if(sol > dec_out[i]){
                 dec_out[i] = sol;
@@ -32,10 +32,15 @@ ll lids(int *ar , int size){
     cout<<"now for the sol "<<endl;
     for(int i=0;i<size;i++){
          cout<<inc_out[i]<<" and "<<dec_out[i]<<endl; 
-        inc_out[i] = inc_out[i]+dec_out[i];
+       
+    }
+    for(int i=0;i<size;i++){
+         inc_out[i] = inc_out[i]+dec_out[i];
     }
     int max=1;
+    cout<<"the sum matrix is "<<endl;
     for(int i=0;i<size;i++){
+        cout<<inc_out[i]<<" "; 
         if(max<inc_out[i]){
             max = inc_out[i];
         }
