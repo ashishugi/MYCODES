@@ -14,27 +14,40 @@
         }
     }
     int max_profit(struct job ar[] , int n){
-        int p[n];
-        int index=0;
-        p[0]=ar[0].profit;
-        for(int i=0;i<n;i++){
-             int including=ar[i].profit;
-             int lnc=-1;
-            
-            for(int j=i-1;j>=0;j--){
-                if((ar[i].st>=ar[j].ft)){
-                    lnc=j;
-                   break;
+        sort(ar, ar+n,compare);
+        // cout<<"after the sorting the structure is "<<endl;
+        // for(int i=0;i<n;i++){
+        //     cout<<ar[i].st<< " " <<ar[i].ft<<" " <<ar[i].profit<<endl;
+        // }
+        int *dp = new int[n+1];
+        dp[0] = ar[0].profit;
+        for(int i=1;i<n;i++){
+            int value = -1;
+           int min = 0;
+            int maximum=i-1;
+            int mid=0;
+            while(min<=maximum){
+                 mid = (min+maximum)/2;
+                if(ar[mid].ft > ar[i].st){
+                    maximum= mid-1;
                 }
+                else if(ar[mid].ft <= ar[i].st){
+                    value = mid;
+                    min = mid+1;
+                }
+                
             }
-            if(lnc != -1){
-                including +=p[lnc];
+            if(value!=-1){
+            dp[i] =  max(dp[i-1] , ar[i].profit + dp[value]);
             }
-           p[i] = max(including , p[i-1]);
-        } // end of for loop .
-      
-        return p[n-1];
-       
+            else{
+                 dp[i] =  max(dp[i-1] , ar[i].profit);
+            }
+        }
+        // for(int i=0;i<n;i++){
+        //   cout<<dp[i]<<" ";
+        //  }
+       return dp[n-1];
     }
     int main(void){
         int n;
