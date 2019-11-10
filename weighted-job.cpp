@@ -15,10 +15,6 @@
     }
     int max_profit(struct job ar[] , int n){
         sort(ar, ar+n,compare);
-        // cout<<"after the sorting the structure is "<<endl;
-        // for(int i=0;i<n;i++){
-        //     cout<<ar[i].st<< " " <<ar[i].ft<<" " <<ar[i].profit<<endl;
-        // }
         int *dp = new int[n+1];
         dp[0] = ar[0].profit;
         for(int i=1;i<n;i++){
@@ -26,7 +22,7 @@
            int min = 0;
             int maximum=i-1;
             int mid=0;
-            while(min<=maximum){
+            while(min<=maximum){// binary search concept used for serching . 
                  mid = (min+maximum)/2;
                 if(ar[mid].ft > ar[i].st){
                     maximum= mid-1;
@@ -44,9 +40,6 @@
                  dp[i] =  max(dp[i-1] , ar[i].profit);
             }
         }
-        // for(int i=0;i<n;i++){
-        //   cout<<dp[i]<<" ";
-        //  }
        return dp[n-1];
     }
     int main(void){
