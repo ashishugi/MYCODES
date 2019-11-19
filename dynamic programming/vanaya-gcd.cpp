@@ -1,35 +1,38 @@
 #include<bits/stdc++.h>
+long long m = 1000000007;
 using namespace std;
 int sub(int *ar , int n){
-    int *output = new int[n+1];
-    int count =0 ;
-    count = n;
-    output[0] = 1;
+    int **dp=new int*[n+1];
+    for(int i=0;i<n;i++){
+        dp[i] = new int[101];
+        for(int j=0;j<=100;j++){
+            dp[i][j] = 0;
+        }
+    }
+    for(int i=0;i<n;i++){
+        dp[i][ar[i]] =1;
+    }
+    
     for(int i=1;i<n;i++){
-        output[i] = 1;
-        int possible=0;
-        for(int j = i-1;j>=0;--j){
-            if(ar[i] > ar[j]){
-                possible = output[j] + 1;
-            }
-            if(__gcd(ar[i], ar[j])==1){
-                   count++;
-            }
-            if(possible > output[i]){
-                output[i] = possible;
+        for(int j=0;j<i;++j){
+            
+            if(ar[j]  < ar[i] ){
+                
+                for(int k=1;k<=100;k++){
+                   int newgcd = __gcd(ar[i] , k);
+                    dp[i][newgcd]+=dp[j][k];   // dp[i][newgcd]+=dp[j][k]
+                    dp[i][newgcd] %= m;
+                }
                
             }
         }
     }
-    int max=0;
-    for(int i=0;i<n;i++){
-         if(max <  output[i]){
-             max= output[i];
-         }
+   
+    long long sum=0;
+        for(int i=0;i<n;i++){
+           sum=(sum%m + (dp[i][1])%m)%m;
     }
-
-    delete [] output;
-    return count;
+    return sum;
 }
 int main(void){
     int n;

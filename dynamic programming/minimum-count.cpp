@@ -1,24 +1,31 @@
 #include<bits/stdc++.h>
 #include<math.h>
 using namespace std;
-int minimum(int n , int *dp  ,int size){
-    if( n ==0){
-      return 1;
+int minimum(int n){
+
+  int *output=new int[n+2];
+  output[0]=0;
+  output[1] =1;
+  output[2]=2;
+  output[3] = 3;
+  for(int i=4;i<=n;i++){
+    int minimum = INT_MAX;
+    int temp=0;
+    int ans = INT_MAX;
+    for(int j =1;j<=i/2;j++){
+      int sol = j*j;
+      if(sol <= i){
+         ans= min(output[i -sol]+1 , ans); 
+        if(ans < minimum){
+          minimum = ans;
+         }
+      }
     }
-    if(n<0){
-      return INT_MAX;
-    }
-    if(size <= 0){
-      return INT_MAX;
-    }
-    int ans1=0 , ans2=0;
-   
-   for(int i=1;i<n;i++){
-      ans1 =ans1+ minimum(n - dp[i] ,dp ,size);
-      ans2 =ans2+ minimum(n , dp+1, size-1);
- 
-   }
-    return min(ans1,ans2);
+    output[i] = minimum;
+
+  }
+  return output[n];
+
 }
 int main(void){
     int n;
@@ -27,7 +34,7 @@ int main(void){
     for(int i=0;i<=n;i++){
       dp[i] = i*i;
     }
-    int count = minimum(n , dp , n);
+    int count = minimum(n);
     cout<<count<<endl;
     return 0;
 }
