@@ -1,8 +1,5 @@
-
-/**********CODE WILL RUN PROPERLY IN TURBO C COMPILER ***************/
-#include<stdio.h>
-#include<conio.h>
-#include<alloc.h>
+#include<bits/stdc++.h>
+using namespace std;
 struct node
 {
  struct node *next;
@@ -67,49 +64,46 @@ void display(struct node *first)
 {    struct node *ptr;
  for(ptr=first;ptr!=NULL;ptr=ptr->next)
  {
-   printf("%d",ptr->coef);
-   printf("x^%d",ptr->expo);
-   printf("+");
+   cout<<ptr->coef;
+   cout<<"x^"<<ptr->expo;
+   cout<<"+";
  }
- printf("\n");
+ cout<<endl;
 
 }
-void main()
+int main()
 {
   struct node *w,*ptr;
   char ch='y';
   int coef,expo;
-  clrscr();
   while(ch=='y')
   {
-  printf("\n enter the coefficient : ");
-  scanf("%d",&coef);
-  printf("enter the exponent:");
-  scanf("%d",&expo);
+  cout<<"enter the coefficient"<<endl;
+  cin>>coef;
+  cout<<"enter the exponent"<<endl;
+  cin>>expo;
   firstp=insert(firstp,coef,expo);
-  printf("Do you want to enter more Y/N:\t");
-  ch=getch();
+  cout<<"Do you want to enter more Y/N:";
+  cin>>ch;
   }              ch='y';
-  printf("\n Now for the 2nd equation");
+  cout<<"\n Now for the 2nd equation";
   while(ch=='y')
   {
-  printf("\n enter the coefficient : ");
-  scanf("%d",&coef);
-  printf("enter the exponent:");
-  scanf("%d",&expo);
+  cout<<"enter the coefficient : "<<endl;
+  cin>>coef;
+  cout<<"enter the exponent:"<<endl;
+  cin>>expo;
   firstq=insert(firstq,coef,expo);
-  printf("Do you want to enter more Y/N:\t");
-  ch=getch();
+  cout<<"Do you want to enter more Y/N:"<<endl;
+  cin>>ch;
  }
    firstr=add(firstp,firstq,firstr);
-   printf("\n the first euation is: \t");
+   cout<<"the first euation is: "<<endl;
    display(firstp);
-   printf("\nthe 2nd equation is:\t");
+   cout<<" the 2nd equation is:\t"<<endl;
   display(firstq);
-    printf("the resultant equation is : \t");
+    cout<<"the resultant equation is : \t"<<endl;
     display(firstr);
 
-    getch();
+    
 }
-
-

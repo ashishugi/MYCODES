@@ -4,6 +4,8 @@
         "string": "cpp",
         "bitset": "cpp",
         "chrono": "cpp",
-        "algorithm": "cpp"
+        "algorithm": "cpp",
+        "unordered_set": "cpp",
+        "vector": "cpp"
     }
 }

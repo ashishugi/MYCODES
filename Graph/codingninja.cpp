@@ -1,4 +1,4 @@
-bool check(char ar[][MAXN],int n,int m,int i,int j,string str,bool **visited){
+bool check(char ar[][MAXN],int n,int m,int i,int j,string str,bool **visited,int* x,int* y){
     visited[i][j] = true;
    if(i<0 || j<0 || i>=n || j>=m){
        return false;
@@ -6,80 +6,40 @@ bool check(char ar[][MAXN],int n,int m,int i,int j,string str,bool **visited){
    if(str.length()==0){
        return true;
    }
-   bool ans1=false,ans2=false,ans3=false,ans4=false,ans5=false,ans6=false,ans7=false,ans8=false;
-   if((i+1<n) && ar[i+1][j]==str[0]){
-     if(visited[i+1][j]==false){
-    ans1= check(ar,n,m,i+1,j,str.substr(1),visited);
-     }
-       //visited[i+1][j]=false;
-   }
-    if((i+1<n &&  j+1<m) && ar[i+1][j+1]==str[0]){
-      if(visited[i+1][j+1]==false){
-      ans2 = check(ar,n,m,i+1,j+1,str.substr(1),visited);
-      }
-      //  visited[i+1][j+1]=false;
-   }
-    if( (j+1<m) && ar[i][j+1]==str[0] ){
-       if(visited[i][j+1]==false){
-         ans3=check(ar,n,m,i,j+1,str.substr(1),visited);
-       }
-      //  visited[i][j+1]=false;
-   }
-     if((i-1>=0) && ar[i-1][j]==str[0]){
-       if(visited[i-1][j]==false){
-       ans4= check(ar,n,m,i-1,j,str.substr(1),visited);
-       }
-        // visited[i-1][j]=false;
-   }
-     if((i-1>=0 && j+1<m) && ar[i-1][j+1]==str[0]){
-        if(visited[i-1][j+1]==false){
-        ans5=check(ar,n,m,i-1,j+1,str.substr(1),visited);
+   bool ans=false;
+    for(int k=0;k<8;k++){
+        int newx = i+x[k];
+        int newy = j+y[k];
+        if(newx>=0 && newx<n && newy>=0 && newy<m){
+            if((ar[newx][newy] == str[0]) && !visited[newx][newy]){
+               ans = check(ar,n,m,newx,newy,str.substr(1),visited , x,y);
+                visited[newx][newy] = false;
+               if(ans){
+                   return true;
+               }
+            }
         }
-       //  visited[i-1][j+1]=false;
-   }
-     if((i+1<n && j-1>=0)&& ar[i+1][j-1]==str[0] ){
-         if(visited[i+1][j-1]==false){
-         ans6=check(ar,n,m,i+1,j-1,str.substr(1),visited);
-         }
-        // visited[i+1][j-1]=false;
-   }
-     if((j-1>=0) && ar[i][j-1]==str[0] ){
-        if(visited[i][j-1]==false){
-        ans7= check(ar,n,m,i,j-1,str.substr(1),visited);
-        }
-       //  visited[i][j-1]=false;
-   }
-    if((i-1>=0 && j-1>=0) && ar[i-1][j-1]==str[0] ){
-         if(visited[i-1][j-1]==false){
-         ans8=check(ar,n,m,i-1,j-1,str.substr(1),visited);
-         }
-      //  visited[i-1][j-1]=false;
-   }
-    visited[i][j] = false;
-  
-   if(ans1 || ans2 || ans3 || ans4 || ans5 || ans6 || ans7 || ans8){
-       return true;
-   }
-   else{
-       return false;
-   }
-    
+        visited[i][j] = true;
+    }
+   return false;
 }
 int solve(char ar[][MAXN],int n, int m)
 {
 	 string str = "CODINGNINJA";
     int flag=0;
-    for(int i=0;i<n;i++){
-        for(int j=0;j<m;j++){
-            if(ar[i][j]=='C'){
-                bool** visited = new bool*[n];
+    int x[] = {-1,-1,0,1,1,1,0,-1};
+    int y[] = {0,1,1,1,0,-1,-1,-1};
+      bool** visited = new bool*[n];
                 for(int i=0;i<n;i++){
                     visited[i] = new bool[m];
                     for(int j=0;j<m;j++){
                         visited[i][j] = false;
                     }
                 }
-                bool sol = check(ar,n,m,i,j,str.substr(1),visited);
+    for(int i=0;i<n;i++){
+        for(int j=0;j<m;j++){
+            if(ar[i][j]=='C'){
+                bool sol = check(ar,n,m,i,j,str.substr(1),visited,x,y);
                 if(sol){
                     flag=1;
                     break;

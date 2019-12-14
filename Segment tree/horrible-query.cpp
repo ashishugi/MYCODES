@@ -58,9 +58,7 @@ ll query(ll *tree,ll *lazy,int start,int end,int index,int left,int right ){
     return ans1+ans2;
 }
 int main(void){
-    int t;
-    cin>>t;
-    while(t--){
+    
         int n,c;
         cin>>n>>c;
         ll *tree = new ll[4*n];
@@ -72,17 +70,17 @@ int main(void){
         while(c--){
             int type;
             cin>>type;
-            if(type == 0){
+            if(type == 0){ // type 0 for updation
                 int p,q,v;
                 cin>>p>>q>>v;
                 update_add(tree,lazy,0,n-1,1,p-1,q-1,v);
             }
-            else{
+            else{ // type 1 for query
                 int p,q;
                 cin>>p>>q;
                 ll sol = query(tree,lazy,0,n-1,1,p-1,q-1);
                 cout<<sol<<endl;
             }
         }
-    }
+    
 }
