@@ -2,6 +2,7 @@
 #include<vector>
 #include<unordered_set>
 #include<stack>
+#include<set>
 using namespace std;
 void dfs(bool* visited,int start,vector<int>* edge ,stack<int>& st){
     visited[start] = true;
@@ -9,7 +10,7 @@ void dfs(bool* visited,int start,vector<int>* edge ,stack<int>& st){
         int adj = edge[start][i];
         if(!visited[adj]){
             dfs(visited,adj,edge,st);
-           
+
         }
     }
     st.push(start);
@@ -21,7 +22,7 @@ void dfs2(bool* visited,vector<int>* edgeT,int start,unordered_set<int>* com){
         int adj = edgeT[start][i];
         if(!visited[adj]){
             dfs2(visited,edgeT,adj,com);
-            
+
         }
     }
 }
@@ -34,26 +35,26 @@ void scc(vector<int>* edge,vector<int>* edgeT,int n){
     for(int i=0;i<n;i++){
         if(!visited[i]){
             dfs(visited,i,edge,st);
-           
+
         }
     }
     for(int i=0;i<n;i++){
         visited[i] = false;
     }
-    unordered_set<unordered_set<int> *>* collection = new unordered_set<unordered_set<int> *>(); 
+    unordered_set<unordered_set<int> *>* collection = new unordered_set<unordered_set<int> *>();
     while(!st.empty()){
        int top = st.top();
         st.pop();
-           
+
                 unordered_set<int>* component = new unordered_set<int>();
                 if(!visited[top]){
                     dfs2(visited , edgeT,top,component);
-                    
                 }
-               (collection)->insert(component); 
-        
-        
+               (collection)->insert(component);
+
+
      }
+     cout<<"the output at the colection is "<<endl;
     unordered_set< unordered_set<int>* >::iterator itr = collection->begin();
     for(;itr!=collection->end();itr++){
         unordered_set<int>* temp = *itr;
@@ -63,13 +64,49 @@ void scc(vector<int>* edge,vector<int>* edgeT,int n){
         }
         cout<<endl;
     }
-}
+    cout<<"now calculating the count"<<endl;
+    /*We have to simply count the number here after */
+    int count=0;
+    unordered_set<unordered_set<int>* > * final = new unordered_set< unordered_set<int>*>();
+    unordered_set<int>* compo = new unordered_set<int>();
+    unordered_set<unordered_set<int> *>::iterator it = collection->begin();
+    for(;it!=collection->end();it++){ //
+      unordered_set<int>::iterator it2 = (*it)->begin();
+      int element= (*it2),val;
+      int flag =0;
+      set<int> s;
+      copy((*it)->begin(),(*it)->end(), inserter(s , s.begin()));
+      for(;it2!=(*it)->end();it2++){
+         val = (*it2);
+        for(int i=0;i<edge[val].size();i++){
+          if(s.find(edge[val][i]) == s.end()){
+            flag=1;
+            cout<<edge[val][i]<< " ";
+            break;
+          }else{
+            continue;
+          }
+        }
+        if(flag==1){
+          break;
+        }
+      }
+      if(flag==0){
+      //  cout<<element<< " ";
+        count++;
+      }
+      cout<<endl;
+
+    }
+
+    cout<<count<< " "<<endl;
+} // end of the function
 int main(){
     // making of adjacency list
     int n;
     cin>>n;
      vector<int>* edgeT = new vector<int> [n];
-    vector<int>* edge = new vector<int>[n];
+     vector<int>* edge = new vector<int>[n];
    int e;
     cin>>e;
     for(int i=0;i<e;i++){
