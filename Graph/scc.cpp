@@ -69,8 +69,8 @@ int main(){
     int n;
     cin>>n;
      vector<int>* edgeT = new vector<int> [n];
-    vector<int>* edge = new vector<int>[n];
-   int e;
+     vector<int>* edge = new vector<int>[n];
+     int e;
     cin>>e;
     for(int i=0;i<e;i++){
         int s,f;
