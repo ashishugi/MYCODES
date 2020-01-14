@@ -25,10 +25,8 @@ bool bipartite(vector<int>* edge ,int n){
         return false;
       }
     }
-
   }
   return true;
-
 }
 int main(void){
   while(true){
