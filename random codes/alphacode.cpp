@@ -27,7 +27,7 @@ int main(void){
             int ans = ncode(str , str.length());
             cout<<ans<<endl;
         } 
-
+         
     }while(str!="0");
     
  
