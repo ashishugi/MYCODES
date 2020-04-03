@@ -14,13 +14,18 @@ int main(void){
         while(q--){
             int p;
             cin>>p;
+            int* temp = new int[n];
             loop(i,n){
-                ar[i] = (p ^ ar[i]);
+                temp[i]=0;
+            }
+            loop(i,n){
+                
+                temp[i] = (p ^ ar[i]);
             }
             int counteve=0;
             int countodd=0;
            loop(i,n){
-               int val = ar[i];
+               int val = temp[i];
                int tempcount=0;
                for(int j=0;j<(32);j++){
                    if(val&(1<<j)){
