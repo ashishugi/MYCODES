@@ -7,5 +7,8 @@
         "algorithm": "cpp",
         "unordered_set": "cpp",
         "vector": "cpp"
-    }
+    },
+    "cSpell.words": [
+        "indegree"
+    ]
 }

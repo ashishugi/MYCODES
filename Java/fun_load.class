@@ -1,0 +1,25 @@
+class A
+{
+   int x=4;
+   void function()
+   {
+    System.out.print(x);
+   }
+}
+class exceptio
+{ 
+  public static void main(String a[])
+  {
+   A ob1=null;
+   try {
+   
+   ob1.function();
+   }
+   catch(NullPointerException e)
+   {
+    System.out.println("No memory allocate to the object ");
+    System.out.println(e);
+   }
+    
+  }
+}
