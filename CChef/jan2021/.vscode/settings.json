@@ -1,0 +1,9 @@
+{
+    "files.associations": {
+        "*.html": "html",
+        "cmath": "cpp",
+        "complex": "cpp",
+        "cstdlib": "cpp",
+        "chrono": "cpp"
+    }
+}
